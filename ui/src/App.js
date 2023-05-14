@@ -2,13 +2,14 @@
 import React, { useState } from 'react';
 //import 'antd/dist/reset.css';
 import { Row, Col, Dropdown, Menu, Avatar, Card, Space, Table } from 'antd';
-import { GrTable } from "react-icons/gr";
+import { FaTable } from "react-icons/fa";
 import { VscPieChart } from "react-icons/vsc";
 
 // Native Imports
 import logo from "./images/logo.png";
 import byte from "./images/byte.png";
 import { data } from "./mockData/transaction";
+import ProfileModal from "./ProfileModal";
 
 export default function App() {
     const [profileModalOpen, setProfileModalOpen] = useState(false);
@@ -18,37 +19,59 @@ export default function App() {
     const logoutMenu = (
         <Menu>
             <Menu.Item key="profile">
-                {/* TODO: Add "WIP" modal for this option */}
-                <a href="#" >Profile</a>
+                <a href="#" onClick={() => handleProfileClick()}>Profile</a>
             </Menu.Item>
             <Menu.Item key="logOut" disabled="true">
                 <a href="#" >Log Out</a>
             </Menu.Item>
         </Menu>
     );
+    
+    function handleProfileClick() {
+        setProfileModalOpen(!profileModalOpen);
+    }
 
     const columns = [
         {
             title: 'Transaction',
-            dataIndex: 'description'
+            dataIndex: 'description',
+            sorter: {
+                compare: (a, b) => a.description.localeCompare(b.description),
+                multiple: 3
+            }
         },
         {
             title: 'Merchant',
-            dataIndex: ['merchant', 'name']
+            dataIndex: ['merchant', 'name'],
+            sorter: {
+                compare: (a, b) => a.merchant.name.localeCompare(b.merchant.name),
+                multiple: 2
+            }
         },
         {
             title: 'Amount',
-            dataIndex: 'amount'
+            dataIndex: 'amount',
+            sorter: {
+                compare: (a, b) => a.amount - b.amount,
+                multiple: 1
+            }
         },
         {
             title: 'Category',
-            dataIndex: 'type'
+            dataIndex: 'type',
+            sorter: {
+                compare: (a, b) => a.type.localeCompare(b.type),
+                multiple: 4
+            }
         },
         {
             title: 'Date',
             dataIndex: 'purchase_date',
+            sorter: {
+                compare: (a, b) => new Date(a.purchase_date) - new Date(b.purchase_date),
+                multiple: 5
+            }
             // TODO: Add custom render to this column (YYYY-MM-DD -> MMM dd, YYYY)
-            // TODO: Add sorter to this column
         }
     ];
 
@@ -67,7 +90,7 @@ export default function App() {
                         placement="bottom"
                     >
                         <Row onClick={(e) => e.preventDefault()}>
-                            <Avatar src={byte}/>
+                            <Avatar src={byte} size={40}/>
                         </Row>
                     </Dropdown>
                 </Col>             
@@ -78,8 +101,8 @@ export default function App() {
                         <Space>
                             {/* TODO: Style these icons */}
                             {/* TODO: If time, add onClick action for both */}
-                            <a href="#"><GrTable size={25}/></a>
-                            <a href="#"><VscPieChart size={30}/></a>
+                            <a href="#" style={{color: '#38761d'}}><FaTable size={25}/></a>
+                            <a href="#" style={{color: '#38761d'}}><VscPieChart size={30}/></a>
                         </Space>
                     </Row>
                     <Row>
@@ -88,6 +111,14 @@ export default function App() {
                             dataSource={data}
                         />
                     </Row>
+
+                    {profileModalOpen
+                        ? <ProfileModal
+                            open={profileModalOpen}
+                            toggleProfileModal={toggleProfileModal}
+                        />
+                        : <></>
+                    }
                 </Card>
             </Row>
         </>

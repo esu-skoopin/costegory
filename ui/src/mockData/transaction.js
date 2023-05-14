@@ -16,7 +16,7 @@ export const data = [
         },
         amount: 10,
         type: 'Home Improvement 🏠',
-        purchase_date: '2023-04-12'
+        purchase_date: '2023-04-05'
     },
     {
         description: 'Les Miserables tickets',
@@ -26,7 +26,7 @@ export const data = [
         },
         amount: 100,
         type: 'Entertainment 🍿',
-        purchase_date: '2023-04-26'
+        purchase_date: '2023-04-12'
     },
     {
         description: 'SEA → TKY ticket',
@@ -36,7 +36,7 @@ export const data = [
         },
         amount: 1500,
         type: 'Travel ✈️',
-        purchase_date: '2023-04-05'
+        purchase_date: '2023-04-26'
     },
     {
         description: 'Cravings box',
@@ -56,6 +56,6 @@ export const data = [
         },
         amount: 5,
         type: 'Stationery 💌',
-        purchase_date: '2023-05-05'
+        purchase_date: '2023-05-13'
     },
 ];
