@@ -1,17 +1,18 @@
 // Libraries
 import React, { useState } from 'react';
-//import 'antd/dist/reset.css';
-import { Row, Col, Dropdown, Menu, Avatar, Card, Space, Table } from 'antd';
+import { Row, Col, Select, Dropdown, Menu, Avatar, Card, Space, Table } from 'antd';
 import { FaTable } from "react-icons/fa";
 import { VscPieChart } from "react-icons/vsc";
 
 // Native Imports
 import logo from "./images/logo.png";
 import byte from "./images/byte.png";
-import { data } from "./mockData/transaction";
+import { purchases } from "./mockData/purchase";
+import { categories } from "./mockData/category";
 import ProfileModal from "./ProfileModal";
 
 export default function App() {
+    const Option = Select.Option;
     const [profileModalOpen, setProfileModalOpen] = useState(false);
     const [dataMode, setDataMode] = useState('table'); // whether to show the transactions as a 'table' or as a 'chart'
     const toggleProfileModal = () => setProfileModalOpen(!profileModalOpen);
@@ -54,7 +55,10 @@ export default function App() {
             sorter: {
                 compare: (a, b) => a.amount - b.amount,
                 multiple: 1
-            }
+            },
+            render: (amount) => (
+                <span>${new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(amount)}</span>
+            )
         },
         {
             title: 'Category',
@@ -62,6 +66,20 @@ export default function App() {
             sorter: {
                 compare: (a, b) => a.type.localeCompare(b.type),
                 multiple: 4
+            },
+            render: (category) => {
+                return (
+                    <Select
+                        value={category}
+                        style={{ width: '14em', marginRight: '10px', textAlign: 'left' }}
+                    >
+                        {
+                            categories.map((category) => {
+                                return <Option value={category._id} key={category._id}>{category.name}</Option>
+                            })
+                        }
+                    </Select>
+                );
             }
         },
         {
@@ -101,14 +119,14 @@ export default function App() {
                         <Space>
                             {/* TODO: Style these icons */}
                             {/* TODO: If time, add onClick action for both */}
-                            <a href="#" style={{color: '#38761d'}}><FaTable size={25}/></a>
-                            <a href="#" style={{color: '#38761d'}}><VscPieChart size={30}/></a>
+                            <a href="#" style={{ color: '#38761d' }}><FaTable size={25}/></a>
+                            <a href="#" style={{ color: '#38761d' }}><VscPieChart size={30}/></a>
                         </Space>
                     </Row>
                     <Row>
                         <Table
                             columns={columns}
-                            dataSource={data}
+                            dataSource={purchases}
                         />
                     </Row>
 

@@ -7,7 +7,7 @@
 // 3-5 restaurants/cafes
 // shopping things: clothes, stickers
 // Yam and Banana store
-export const data = [
+export const purchases = [
     {
         description: 'Plant mulch',
         merchant: {
