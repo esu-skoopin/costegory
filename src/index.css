@@ -12,3 +12,17 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
         monospace;
 }
+
+.ant-input:hover {
+    border-color: #d9d9d9;
+}
+
+.ant-input:focus {
+    border-color: #d9d9d9;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.slick-dots li button:before, .slick-dots li.slick-active button:before {
+    color: #a4ce88;
+}

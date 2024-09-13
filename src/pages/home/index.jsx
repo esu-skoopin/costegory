@@ -1,20 +1,20 @@
 // Libraries
 import React, { useState } from 'react';
 import { Row, Col, Select, Dropdown, Menu, Avatar, Card, Space, Table } from 'antd';
-import { FaTable } from "react-icons/fa";
-import { VscPieChart } from "react-icons/vsc";
+import { FaTable } from 'react-icons/fa';
+import { VscPieChart } from 'react-icons/vsc';
 
 // Native Imports
-import logo from "./images/logo.png";
-import byte from "./images/byte.png";
-import { purchases } from "./mockData/purchase";
-import { categories } from "./mockData/category";
-import ProfileModal from "./ProfileModal";
+import logo from '../../images/logo.png';
+import byte from '../../images/byte.png';
+import { purchases } from '../../mockData/purchase';
+import { categories } from '../../mockData/category';
+import ProfileModal from './ProfileModal';
 
 export default function App() {
     const Option = Select.Option;
     const [profileModalOpen, setProfileModalOpen] = useState(false);
-    const [dataMode, setDataMode] = useState('table'); // whether to show the transactions as a 'table' or as a 'chart'
+    const [dataMode, setDataMode] = useState('table');  // whether to show the transactions as a 'table' or as a 'chart'
     const toggleProfileModal = () => setProfileModalOpen(!profileModalOpen);
     
     const logoutMenu = (
@@ -23,7 +23,7 @@ export default function App() {
                 <a href="#" onClick={() => handleProfileClick()}>Profile</a>
             </Menu.Item>
             <Menu.Item key="logOut" disabled="true">
-                <a href="#" >Log Out</a>
+                <a href="#">Log Out</a>
             </Menu.Item>
         </Menu>
     );
@@ -98,7 +98,7 @@ export default function App() {
             <Row align="middle">
                 {/* Left-aligned col for logo */}
                 <Col span={6}>
-                    <img src={logo} alt="Costegory logo" width="200px"></img> 
+                    <img src={logo} alt="Costegory logo" width="200px" />
                 </Col>               
                 {/* Right-aligned col for profile picture and mock log out feature */}
                 <Col span={6} offset={12} style={{ display: "flex", justifyContent: "flex-end", paddingRight: "30px" }}>
@@ -130,12 +130,11 @@ export default function App() {
                         />
                     </Row>
 
-                    {profileModalOpen
-                        ? <ProfileModal
+                    {profileModalOpen &&
+                        <ProfileModal
                             open={profileModalOpen}
                             toggleProfileModal={toggleProfileModal}
                         />
-                        : <></>
                     }
                 </Card>
             </Row>

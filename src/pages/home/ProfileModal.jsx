@@ -1,5 +1,5 @@
 import { Modal, Row } from "antd";
-import byte from "./images/byte.png";
+import byte from "../../images/byte.png";
 
 export default function ProfileModal(props) {
     const { open, toggleProfileModal } = props;
